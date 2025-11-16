@@ -36,6 +36,11 @@ public void addMember() {
             sc.nextLine();
         }
     }
+    public void viewMembers() {
+        if (members.isEmpty()) System.out.println("No members found!");
+        else for (Member m : members) m.showInfo();
+    }
+
 
 
 }
