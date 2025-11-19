@@ -40,6 +40,21 @@ public void addMember() {
         if (members.isEmpty()) System.out.println("No members found!");
         else for (Member m : members) m.showInfo();
     }
+     public void updateMember() {
+        System.out.print("Enter Member ID to update: ");
+        String id = sc.next();
+        for (Member m : members) {
+            if (m.getMemberId().equals(id)) {
+                System.out.print("Enter new name: ");
+                m.name = sc.next();
+                saveMembers();
+                System.out.println("Member updated!");
+                return;
+            }
+        }
+        System.out.println("Member not found!");
+    }
+
 
 
 
