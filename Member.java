@@ -24,12 +24,10 @@ public class Member extends Person {
                            " | Due: Rs." + dueAmount);
     }
 
-    // Convert member to a single line for saving
     public String toFileString() {
         return memberId + "," + name + "," + age + "," + membershipType + "," + dueAmount;
     }
 
-    // Convert line from file back to object
     public static Member fromFileString(String line) {
         String[] data = line.split(",");
         if (data.length >= 5) {
