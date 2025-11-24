@@ -109,6 +109,26 @@ public class GymManagementSystem {
                 System.out.println(m.getMemberId() + " | " + m.name + " | Due: Rs." + m.getDueAmount());
     }
 
+    public void addTrainer() {
+        System.out.print("Enter Trainer ID: ");
+        String id = sc.next();
+        System.out.print("Enter Name: ");
+        String name = sc.next();
+        System.out.print("Enter Age: ");
+        int age = sc.nextInt();
+
+        trainers.add(new Trainer(id, name, age));
+        System.out.println("Trainer added successfully!");
+}
+
+    public void viewReports() {
+        System.out.println("\n--- Members ---");
+        viewMembers();
+        System.out.println("\n--- Payments ---");
+        for (Payment p : payments) p.printReceipt();
+        System.out.println("\n--- Dues ---");
+        viewDues();
+    }
 
 
 
