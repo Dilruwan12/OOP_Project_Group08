@@ -24,11 +24,9 @@ public class Member extends Person {
                            " | Due: Rs." + dueAmount);
     }
 
-    
     public String toFileString() {
         return memberId + "," + name + "," + age + "," + membershipType + "," + dueAmount;
     }
-
 
     public static Member fromFileString(String line) {
         String[] data = line.split(",");
