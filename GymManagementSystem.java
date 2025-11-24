@@ -16,7 +16,7 @@ public class GymManagementSystem {
         loadMembers();
         loadPayments();
     }
-public void addMember() {
+    public void addMember() {
         try {
             System.out.print("Enter Member ID: ");
             String id = sc.next();
@@ -53,6 +53,60 @@ public void addMember() {
             }
         }
         System.out.println("Member not found!");
+    }
+    public void deleteMember() {
+        System.out.print("Enter Member ID to delete: ");
+        String id = sc.next();
+        members.removeIf(m -> m.getMemberId().equals(id));
+        saveMembers();
+        System.out.println("Member deleted!");
+    }
+
+    public void markAttendance() {
+        System.out.print("Enter Member ID: ");
+        String id = sc.next();
+        for (Member m : members) {
+            if (m.getMemberId().equals(id)) {
+                System.out.println(m.name + " marked present today.");
+                return;
+            }
+        }
+        System.out.println("Member not found!");
+    }
+
+    public void recordPayment() {
+        try {
+            System.out.print("Enter Payment ID: ");
+            String pid = sc.next();
+            System.out.print("Enter Member ID: ");
+            String mid = sc.next();
+            System.out.print("Enter Amount: ");
+            double amt = sc.nextDouble();
+            System.out.print("Enter Date: ");
+            String date = sc.next();
+
+            Payment p = new Payment(pid, mid, amt, date);
+            payments.add(p);
+
+            for (Member m : members) {
+                if (m.getMemberId().equals(mid)) {
+                    m.payDue(amt);
+                }
+            }
+
+            savePayments();
+            saveMembers();
+            System.out.println("Payment recorded successfully!");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid amount entered!");
+            sc.nextLine();
+        }
+    }
+
+    public void viewDues() {
+        for (Member m : members)
+            if (m.getDueAmount() > 0)
+                System.out.println(m.getMemberId() + " | " + m.name + " | Due: Rs." + m.getDueAmount());
     }
 
 
