@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-import java.lang.reflect.Member;
 
 public class GymManagementSystem {
     private ArrayList<Member> members = new ArrayList<>();
@@ -129,7 +128,55 @@ public class GymManagementSystem {
         System.out.println("\n--- Dues ---");
         viewDues();
     }
+    private void saveMembers() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(MEMBER_FILE))) {
+            for (Member m : members) {
+                bw.write(m.toFileString());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving members: " + e.getMessage());
+        }
+    }
 
+    private void loadMembers() {
+        File file = new File(MEMBER_FILE);
+        if (!file.exists()) return;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Member m = Member.fromFileString(line);
+                if (m != null) members.add(m);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading members: " + e.getMessage());
+        }
+    }
+
+    private void savePayments() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PAYMENT_FILE))) {
+            for (Payment p : payments) {
+                bw.write(p.toFileString());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving payments: " + e.getMessage());
+        }
+    }
+
+    private void loadPayments() {
+        File file = new File(PAYMENT_FILE);
+        if (!file.exists()) return;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Payment p = Payment.fromFileString(line);
+                if (p != null) payments.add(p);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading payments: " + e.getMessage());
+        }
+    }
 
 
 }
