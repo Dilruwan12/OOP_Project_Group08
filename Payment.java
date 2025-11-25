@@ -23,4 +23,11 @@ public class Payment {
         return null;
     }
 
+    public void printReceipt() {
+        System.out.println("Payment ID: " + paymentId + " | Member ID: " + memberId +
+                           " | Amount: Rs." + amount + " | Date: " + date);
+    }
+
+    public String getMemberId() { return memberId; }
+    public double getAmount() { return amount; }
 }
